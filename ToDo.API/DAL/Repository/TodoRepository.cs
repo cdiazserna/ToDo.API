@@ -24,6 +24,7 @@ namespace ToDo.API.DAL.Repository
 
         public async Task<Todo> CreateAsync(Todo todo)
         {
+            todo.CreatedDate = DateTime.Now;
             _context.Todos.Add(todo);
             await _context.SaveChangesAsync();
             return todo;
@@ -31,6 +32,7 @@ namespace ToDo.API.DAL.Repository
 
         public async Task<bool> UpdateAsync(Todo todo, int id)
         {
+            todo.ModifiedDate = DateTime.Now;
             var existingItem = await _context.Todos.FindAsync(id);
             if (existingItem == null)
                 return false;
