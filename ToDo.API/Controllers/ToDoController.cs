@@ -39,7 +39,7 @@ namespace ToDo.API.Controllers
         public async Task<ActionResult<TodoItemDTO>> CreateAsync(TodoItemDTO todoItem)
         {
             var createdItem = await _todoService.CreateAsync(todoItem);
-            return CreatedAtAction(nameof(GetByIdAsync), new { id = createdItem.Id }, createdItem);
+            return Ok(createdItem);
         }
 
         [HttpPut]
@@ -50,7 +50,7 @@ namespace ToDo.API.Controllers
             if (!updated)
                 return NotFound();
 
-            return NoContent();
+            return Ok("Todo Item updated");
         }
 
         [HttpDelete]
@@ -61,7 +61,7 @@ namespace ToDo.API.Controllers
             if (!deleted)
                 return NotFound();
 
-            return Ok("Item deleted");
+            return Ok("Todo Item deleted");
         }
     }
 }
